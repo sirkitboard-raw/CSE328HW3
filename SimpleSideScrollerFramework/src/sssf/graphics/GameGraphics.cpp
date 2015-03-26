@@ -97,11 +97,21 @@ void GameGraphics::renderText(GameText *text)
 	// IT COULD ALSO BE USED FOR GAME TEXT LIKE HEALTH STATS
 	if (debugTextShouldBeRendered)
 	{
+		TextToDraw *ttd = text->getTextToDrawAtIndex(0);
+		ttd->y = 200;
+		renderTextToDraw(ttd);
 		int numTextObjects = text->getNumTextObjectsToDraw();
-		for (int i = 0; i < numTextObjects; i++)
+		for (int i = 1; i < numTextObjects; i++)
 		{
 			TextToDraw *textToDraw = text->getTextToDrawAtIndex(i);
 			renderTextToDraw(textToDraw);
+		}
+	}
+	else {
+		if (game->getGSM()->isGameInProgress()) {
+			TextToDraw *ttd = text->getTextToDrawAtIndex(0);
+			ttd->y = 10;
+			renderTextToDraw(ttd);
 		}
 	}
 }

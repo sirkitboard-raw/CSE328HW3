@@ -35,6 +35,19 @@ void BugginOutTextGenerator::appendMouseCoords(Game *game)
 	textToGenerate.append(wss.str());
 }
 
+void BugginOutTextGenerator::appendLives(Game* game) {
+	int lives = game->getGSM()->getSpriteManager()->getPlayer()->getLives();
+	wstringstream lss;
+	if (lives == 3) { livesText.append(L"LIVES LEFT : 3\n"); }
+	if (lives == 2) { livesText.append(L"LIVES LEFT : 2\n"); }
+	if (lives == 1) { livesText.append(L"LIVES LEFT : 1\n"); }
+	if (lives == 0) { livesText.append(L"LIVES LEFT : 0\n"); }
+//	lss << "0";
+//	lss << L"\n";
+	textToGenerate.append(lss.str());
+}
+
+
 /*
 	initText - Provides an example of how to render text to our screen every frame,
 	allowing for the text to continually change. This method adds a text object
@@ -45,9 +58,10 @@ void BugginOutTextGenerator::initText(Game *game)
 {
 	// FIRST UPDATE THE TEXT THIS GENERATOR IS USING
 	appendMouseCoords(game);
-
+	appendLives(game);
 	// AND THEN HAND IT TO THE TEXT MANAGER, SPECIFYING WHERE IT SHOULD BE RENDERED
 	GameText *text = game->getText();
+	text->addText(&livesText, W_TEXT_X, W_TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&textToGenerate, W_TEXT_X, W_TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 }
 
@@ -62,5 +76,7 @@ void BugginOutTextGenerator::updateText(Game *game)
 	// SIMPLY CLEAR IT OUT OF OLD CHARACTER DATA AND FILL IT IN WITH
 	// WHAT WE WANT.
 	textToGenerate.clear();
+	livesText.clear();
 	appendMouseCoords(game);
+	appendLives(game);
 }

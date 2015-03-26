@@ -10,7 +10,9 @@ class Player : public AnimatedSprite {
 private:
 	int jumped;
 	int health;
-	int state;
+	int lives=3;
+	int frameCount;
+	bool visible;
 
 public:
 	Player();
@@ -20,7 +22,12 @@ public:
 	void				incrementJumped()		{ jumped++; }
 	int					getHealth()				{ return health; }
 	void				incrementHealth(int incr) { health += incr; }
-	int					getState()				{ return state;  }
-	void					setState(int st)				{ state = st; }
+	int					getFrameCount()			{ return frameCount;  }
+	void				setFrameCount(int st)	{ frameCount = st; }
+	bool				isVisible()				{ return visible; }
+	int					getLives()				{ return lives; }
+	void				setLives(int liv)		{ lives = liv; }
+
 	int checkWin(World* world);
+	void checkVisible();
 };

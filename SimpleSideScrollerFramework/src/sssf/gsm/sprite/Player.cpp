@@ -8,6 +8,9 @@
 Player::Player() {
 	jumped = 0;
 	health = 10;
+	frameCount = 0;
+	visible = true;
+	lives = 3;
 }
 
 
@@ -32,4 +35,21 @@ int Player::checkWin(World* world) {
 		return 1;
 	}
 	return 0;
+}
+
+void Player::checkVisible() {
+	if (health == 10) {
+		visible = true;
+		frameCount = 0;
+	}
+	else {
+		if (frameCount < 5) {
+			visible = false;
+		}
+		else {
+			visible = true;
+		}
+		frameCount++;
+		frameCount %= ((health * 2) + 10);
+	}
 }

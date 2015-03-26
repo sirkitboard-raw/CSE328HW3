@@ -67,7 +67,10 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		Viewport *viewport = gui->getViewport();
 
 		// ADD THE PLAYER SPRITE
-		addSpriteToRenderList(&player, renderList, viewport);
+		player.checkVisible();
+		if (player.isVisible()) {
+			addSpriteToRenderList(&player, renderList, viewport);
+		}
 
 		// NOW ADD THE REST OF THE SPRITES
 		list<Bot*>::iterator botIterator;
