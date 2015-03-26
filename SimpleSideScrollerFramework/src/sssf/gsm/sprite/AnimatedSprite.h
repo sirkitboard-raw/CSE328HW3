@@ -16,6 +16,8 @@
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gui\Viewport.h"
 
+class World;
+
 class AnimatedSprite : public CollidableObject
 {
 protected:
@@ -39,18 +41,13 @@ protected:
 	// USED TO ITERATE THROUGH THE CURRENT ANIMATION SEQUENCE
 	unsigned int animationCounter;
 
-	int jumped = 0;
-
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
 	wstring				getCurrentState()	{ return currentState;		}
 	unsigned int		getFrameIndex()		{ return frameIndex;		}
 	AnimatedSpriteType*	getSpriteType()		{ return spriteType;		}
-	int					getJumped()			{ return jumped;			}
 	
-	void				resetJumped()		{ jumped = 0;				}	
-	void				incrementJumped()	{ jumped++;					}	
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)

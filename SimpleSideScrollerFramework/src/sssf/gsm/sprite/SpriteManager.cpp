@@ -133,6 +133,7 @@ AnimatedSpriteType* SpriteManager::getSpriteType(unsigned int typeIndex)
 */
 void SpriteManager::unloadSprites()
 {
+	bots.clear();
 	// @TODO - WE'LL DO THIS LATER WHEN WE LEARN MORE ABOUT MEMORY MANAGEMENT
 }
 

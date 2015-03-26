@@ -38,7 +38,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 
 	// LET'S GET THE PLAYER'S PHYSICAL PROPERTIES, IN CASE WE WANT TO CHANGE THEM
 	GameStateManager *gsm = game->getGSM();
-	AnimatedSprite *player = gsm->getSpriteManager()->getPlayer();
+	Player *player = gsm->getSpriteManager()->getPlayer();
 	PhysicalProperties *pp = player->getPhysicalProperties();
 	Viewport *viewport = game->getGUI()->getViewport();
 	
@@ -54,6 +54,12 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			player->resetJumped();
 		}
 
+		//Testing win condition
+		if (player->checkWin(gsm->getWorld()) == 1) {
+			game->getGSM()->unloadCurrentLevel();
+			game->getGSM()->loadLevel(game, 2);
+		}
+		
 		// YOU MIGHT WANT TO UNCOMMENT THIS FOR SOME TESTING,
 		// BUT IN THIS ASSIGNMENT, THE USER MOVES VIA MOUSE BUTTON PRESSES
 		if (input->isKeyDown(A_KEY))

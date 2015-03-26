@@ -163,10 +163,11 @@ void GameStateManager::loadLevel(Game *game, unsigned int initLevel)
 	{
 		if (currentLevel != NO_LEVEL_LOADED)
 			unloadCurrentLevel();
-		currentLevel = initLevel;
+		currentLevel = initLevel-1;
+		wstring levelName = levelNames[currentLevel];
 		wstring fileToLoad = levelFileNamesWithRelativePath[currentLevel];
 		GameDataLoader *dataLoader = game->getDataLoader();
-		dataLoader->loadWorld(game, fileToLoad);
+		dataLoader->loadWorld(game, levelName, fileToLoad);
 	}
 }
 

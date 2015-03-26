@@ -159,11 +159,11 @@ void BugginOutDataLoader::loadGUI(Game *game, wstring guiInitFile)
 	loadLevel - This method should load the data the level described by the
 	levelInitFile argument in to the Game's game state manager.
 */
-void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)	
+void BugginOutDataLoader::loadWorld(Game *game, wstring levelName, wstring levelInitFile)
 {
 	// LOAD THE LEVEL'S BACKGROUND TILES
 	TMXMapImporter tmxMapImporter;
-	tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
+	tmxMapImporter.loadWorld(game, levelName, levelInitFile);
 
 	// LOAD THE LEVEL'S SPRITE IMAGES
 	PoseurSpriteTypesImporter psti;
@@ -175,8 +175,11 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	Physics *physics = gsm->getPhysics();
 	physics->setGravity(W_GRAVITY);
 	SpriteManager *spriteManager = gsm->getSpriteManager();
-	AnimatedSprite *player = spriteManager->getPlayer();
-	physics->addCollidableObject(player);
+	Player *player = spriteManager->getPlayer();
+	if (firstLevel){
+		physics->addCollidableObject(player);
+		firstLevel = false;
+	}
 
 	// NOTE THAT RED BOX MAN IS SPRITE ID 2
 	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(2);
@@ -207,24 +210,25 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	}
 
 	// AND THEN STRATEGICALLY PLACED AROUND THE LEVEL
-	makeRandomJumpingBot(game, botSpriteType, 400, 100);
-	makeRandomJumpingBot(game, botSpriteType, 200, 400);
-	makeRandomJumpingBot(game, botSpriteType, 400, 400);
-	makeRandomJumpingBot(game, botSpriteType, 800, 700);
-	makeRandomJumpingBot(game, botSpriteType, 900, 700);
-	makeRandomJumpingBot(game, botSpriteType, 1000, 700);
-	makeRandomJumpingBot(game, botSpriteType, 100, 1000);
-	makeRandomJumpingBot(game, botSpriteType, 300, 1000);	
-	makeRandomJumpingBot(game, botSpriteType, 500, 1000);
-	makeRandomJumpingBot(game, botSpriteType, 100, 1400);
-	makeRandomJumpingBot(game, botSpriteType, 400, 1400);	
-	makeRandomJumpingBot(game, botSpriteType, 700, 1400);
+//	makeRandomJumpingBot(game, botSpriteType, 400, 100);
+//	makeRandomJumpingBot(game, botSpriteType, 200, 400);
+//	makeRandomJumpingBot(game, botSpriteType, 400, 400);
+//	makeRandomJumpingBot(game, botSpriteType, 800, 700);
+//	makeRandomJumpingBot(game, botSpriteType, 900, 700);
+//	makeRandomJumpingBot(game, botSpriteType, 1000, 700);
+//	makeRandomJumpingBot(game, botSpriteType, 100, 1000);
+//	makeRandomJumpingBot(game, botSpriteType, 300, 1000);	
+//	makeRandomJumpingBot(game, botSpriteType, 500, 1000);
+//	makeRandomJumpingBot(game, botSpriteType, 100, 1400);
+//	makeRandomJumpingBot(game, botSpriteType, 400, 1400);	
+//	makeRandomJumpingBot(game, botSpriteType, 700, 1400);
 
 	// AND THEN A BUNCH LINED UP NEAR THE LEVEL EXIT
 	for (int i = 0; i < 14; i++)
 		makeRandomJumpingBot(game, botSpriteType, 1700.0f + (i*100.0f), 1300.0f);
 
 }
+
 
 void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
 {

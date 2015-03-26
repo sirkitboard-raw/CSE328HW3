@@ -67,6 +67,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	BugginOutDataLoader *bugginOutDataLoader = new BugginOutDataLoader();
 	bugginOutDataLoader->initWinHandle(hInstance, nCmdShow);
 	bugginOutGame->setDataLoader(bugginOutDataLoader);
+	bugginOutGame->getGSM()->addLevel(W_LEVEL_1_DIR, W_LEVEL_1_NAME);
+	bugginOutGame->getGSM()->addLevel(W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 	bugginOutDataLoader->loadGame(bugginOutGame, W_INIT_FILE);
 	
 	// WHAT WE SHOULD BE DOING HERE IS LOADING THE GAME DATA FROM FILES. THIS

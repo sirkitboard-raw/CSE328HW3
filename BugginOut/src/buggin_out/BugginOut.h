@@ -9,9 +9,12 @@
 */
 
 // HERE IS THE BugginOut GAME SETUP/INIT FILE. EVERYTHING WOULD START FROM HERE
-static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerDesert/";
-static const wstring	W_LEVEL_1_NAME			= L"SideScrollerDesertLevel.tmx";
-static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;
+static const wstring	W_LEVEL_1_DIR = L"data/levels/SideScrollerForest/";
+static const wstring	W_LEVEL_1_NAME = L"SideScrollerCustomLevel.tmx";
+static const wstring	W_LEVEL_1_PATH = W_LEVEL_1_DIR + W_LEVEL_1_NAME;
+static const wstring	W_LEVEL_2_DIR			= L"data/levels/SideScrollerDesert/";
+static const wstring	W_LEVEL_2_NAME			= L"SideScrollerDesertLevel.tmx";
+static const wstring	W_LEVEL_2_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;
 static const wstring	W_INIT_FILE				= L"data/BugginOutInit.txt";
 static const wstring	W_GUI_INIT_FILE			= L"data/BugginOutGUI.txt";
 static const string		W_DEBUG_FILE			= "DebugOutput.txt";
@@ -84,6 +87,7 @@ const unsigned int DOWN_KEY = VK_DOWN;
 const unsigned int LEFT_KEY = VK_LEFT;
 const unsigned int RIGHT_KEY = VK_RIGHT;
 const unsigned int SPACE_KEY = VK_SPACE;
+static bool firstLevel = true;
 
 // THIS IS JUST FOR SHOWING HOW THE CURSOR CAN BE CHANGED
 const unsigned int C_KEY = (unsigned int)'C';

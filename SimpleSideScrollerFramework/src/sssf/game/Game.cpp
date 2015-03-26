@@ -217,5 +217,5 @@ void Game::startGame()
 	gsm->goToLoadLevel();	// NOTE THAT CURRENTLY THERE IS NO LEVEL FILE,
 	
 	// THAT'S ONE THING YOU'LL BE DOING
-	dataLoader->loadWorld(this, currentLevelFileName);
+	gsm->loadLevel(this, 1);
 }
