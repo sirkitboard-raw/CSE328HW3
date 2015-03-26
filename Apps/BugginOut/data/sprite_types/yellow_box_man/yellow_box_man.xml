@@ -24,6 +24,12 @@
   <image_file id="19" file_name="yellow_box_man_ATTACKING_UP_2.png"/>
   <image_file id="20" file_name="yellow_box_man_ATTACKING_UP_3.png"/>
   <image_file id="21" file_name="yellow_box_man_ATTACKING_UP_4.png"/>
+  <image_file id="22" file_name="yellow_box_man_man_DEAD_0.png"/>
+  <image_file id="23" file_name="yellow_box_man_man_DEAD_1.png"/>
+  <image_file id="24" file_name="yellow_box_man_man_DEAD_2.png"/>
+  <image_file id="25" file_name="yellow_box_man_man_DEAD_3.png"/>
+  <image_file id="26" file_name="yellow_box_man_man_DEAD_4.png"/>
+  <image_file id="27" file_name="yellow_box_man_man_DEAD_5.png"/>
  </images_list>
  <animations_list>
   <animation_state>
@@ -89,5 +95,16 @@
     <pose image_id="19" duration="1"/>
    </animation_sequence>
   </animation_state>
+  <animation_state>
+    <state>DEAD</state>
+    <animations_sequence>
+      <pose image_id="13" duration="3"/>
+      <pose image_id="14" duration="3"/>
+      <pose image_id="15" duration="3"/>
+      <pose image_id="16" duration="3"/>
+      <pose image_id="17" duration="3"/>
+      <pose image_id="18" duration="3"/>
+    </animations_sequence>
+  </animations_state> 
  </animations_list>  
 </sprite_type>

@@ -53,3 +53,7 @@ void Player::checkVisible() {
 		frameCount %= ((health * 2) + 10);
 	}
 }
+
+void Player::checkCollision(int playerIndex) {
+	
+}

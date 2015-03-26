@@ -142,7 +142,7 @@ void SpriteManager::unloadSprites()
 
 Bot* SpriteManager::removeBot(Bot *botToRemove)
 {
-	return NULL;
+	return botToRemove;
 	// @TODO - WE'LL DO THIS LATER WHEN WE LEARN MORE ABOUT MEMORY MANAGEMENT
 }
 
@@ -166,4 +166,12 @@ void SpriteManager::update(Game *game)
 		bot->updateSprite();
 		botIterator++;
 	}
+}
+
+void SpriteManager::removeBot() {
+	bots.pop_back();
+}
+
+void SpriteManager::removeBotFromList(Bot* bot) {
+	bots.remove(bot);
 }

@@ -48,6 +48,10 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		// WASD KEY PRESSES WILL CONTROL THE PLAYER
 		// SO WE'LL UPDATE THE PLAYER VELOCITY WHEN THESE KEYS ARE
 		// PRESSED, THAT WAY PHYSICS CAN CORRECT AS NEEDED
+		
+		gsm->getSpriteManager()->fillBotTree();
+		int playerNode = gsm->getSpriteManager()->getBotsTree()->indexOf(player);
+		player->checkCollision(playerNode);
 		float vX = pp->getVelocityX();
 		float vY = pp->getVelocityY();
 		if (player->wasOnTileLastFrame()) {

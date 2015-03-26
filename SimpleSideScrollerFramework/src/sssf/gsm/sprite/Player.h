@@ -30,4 +30,5 @@ public:
 
 	int checkWin(World* world);
 	void checkVisible();
+	void checkCollision(int playerIndex);
 };

@@ -17,6 +17,7 @@
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "Player.h"
+#include "QuadTree.h"
 
 class SpriteManager
 {
@@ -28,6 +29,7 @@ private:
 	// THESE ARE THE BOTS IN THE GAME, LIKE ENEMIES, ROCKETS, OR ANYTHING
 	// THAT MOVES AROUND AND IS NOT THE PLAYER
 	list<Bot*> bots;
+	QuadTree botTree;
 
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
 	Player player;
@@ -35,6 +37,7 @@ private:
 	// THE BotRecycler MAKES SURE WE DON'T HAVE TO CONSTRUCT BOTS WHENEVER
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
 	BotRecycler recyclableBots;
+	int numBotsInViewport;
 
 public:
 	// NOTHING TO INIT OR DESTROY
@@ -46,6 +49,9 @@ public:
 	Player*			getPlayer()				{ return &player;			}
 	list<Bot*>::iterator	getBotsIterator()		{ return bots.begin();		}
 	list<Bot*>::iterator	getEndOfBotsIterator()	{ return bots.end();		}
+	QuadTree*				getBotsTree()			{ return &botTree; }
+	void					fillBotTree()			{ botTree.generateTree(bots); }
+	int						getNumBotsInView()		{ return numBotsInViewport; }
 
 	// METHODS DEFINED IN SpriteManager.cpp
 	void				addBot(Bot *botToAdd);
@@ -57,4 +63,6 @@ public:
 	Bot*				removeBot(Bot *botToRemove);
 	void				unloadSprites();
 	void				update(Game *game);
+	void				removeBot();
+	void				removeBotFromList(Bot* bot);
 };

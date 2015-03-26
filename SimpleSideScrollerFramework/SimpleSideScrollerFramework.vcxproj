@@ -29,6 +29,7 @@
     <ClCompile Include="src\sssf\gsm\sprite\AnimatedSprite.cpp" />
     <ClCompile Include="src\sssf\gsm\sprite\AnimatedSpriteType.cpp" />
     <ClCompile Include="src\sssf\gsm\sprite\Player.cpp" />
+    <ClCompile Include="src\sssf\gsm\sprite\QuadTree.cpp" />
     <ClCompile Include="src\sssf\gsm\sprite\SpriteManager.cpp" />
     <ClCompile Include="src\sssf\gsm\state\GameStateManager.cpp" />
     <ClCompile Include="src\sssf\gsm\world\SparseLayer.cpp" />
@@ -72,7 +73,9 @@
     <ClInclude Include="src\sssf\gsm\sprite\AnimatedSprite.h" />
     <ClInclude Include="src\sssf\gsm\sprite\AnimatedSpriteType.h" />
     <ClInclude Include="src\sssf\gsm\sprite\Player.h" />
+    <ClInclude Include="src\sssf\gsm\sprite\QuadTree.h" />
     <ClInclude Include="src\sssf\gsm\sprite\SpriteManager.h" />
+    <ClInclude Include="src\sssf\gsm\sprite\TreeNode.h" />
     <ClInclude Include="src\sssf\gsm\state\GameState.h" />
     <ClInclude Include="src\sssf\gsm\state\GameStateManager.h" />
     <ClInclude Include="src\sssf\gsm\world\SparseLayer.h" />

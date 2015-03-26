@@ -21,6 +21,8 @@
 static const wstring	W_MOUSE_COORDS_TEXT = L"Mouse: (";
 static const int		W_TEXT_X = 200;
 static const int		W_TEXT_Y = 10;
+static const wstring	W_BOTS_HEAP_TEXT = L"Monsters Heap Data: [";
+static const wstring	W_NUM_BOTS = L"Number Of Bots : ";
 
 void BugginOutTextGenerator::appendMouseCoords(Game *game)
 {
@@ -59,10 +61,27 @@ void BugginOutTextGenerator::initText(Game *game)
 	// FIRST UPDATE THE TEXT THIS GENERATOR IS USING
 	appendMouseCoords(game);
 	appendLives(game);
+	appendQuadTreeData(game);
 	// AND THEN HAND IT TO THE TEXT MANAGER, SPECIFYING WHERE IT SHOULD BE RENDERED
 	GameText *text = game->getText();
 	text->addText(&livesText, W_TEXT_X, W_TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&textToGenerate, W_TEXT_X, W_TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&quadText, W_TEXT_X, W_TEXT_Y + 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+}
+
+void BugginOutTextGenerator::appendQuadTreeData(Game* game) {
+	QuadTree *quad_tree = game->getGSM()->getSpriteManager()->getBotsTree();
+	wstringstream wss;
+
+	wss << W_NUM_BOTS << game->getGSM()->getSpriteManager()->getNumberOfSprites() << L"\n";
+	wss << W_BOTS_HEAP_TEXT;
+
+	for (int i = 0; i<20; i++) {
+		wss << quad_tree->sizeOfNode(i) << L",";
+	}
+	wss << quad_tree->sizeOfNode(20) << L"]";
+
+	quadText.append(wss.str());
 }
 
 /*
@@ -77,6 +96,8 @@ void BugginOutTextGenerator::updateText(Game *game)
 	// WHAT WE WANT.
 	textToGenerate.clear();
 	livesText.clear();
+	quadText.clear();
 	appendMouseCoords(game);
 	appendLives(game);
+	appendQuadTreeData(game);
 }

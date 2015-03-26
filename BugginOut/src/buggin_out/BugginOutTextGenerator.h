@@ -20,6 +20,7 @@ private:
 	// THIS IS THE TEXT THIS OBJECT WILL UPDATE EACH FRAME
 	wstring livesText;
 	wstring textToGenerate;
+	wstring quadText;
 
 public:
 	// NOTHING TO INITIALIZE OR DESTROY
@@ -29,6 +30,7 @@ public:
 	// DEFINED IN BugginOutTextGenerator.cpp
 	void appendMouseCoords(Game *game);
 	void appendLives(Game *game);
+	void appendQuadTreeData(Game* game);
 	void initText(Game *game);
 	void updateText(Game *game);
 };
