@@ -18,29 +18,31 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 		CollidableObject *sprite = collision->getCO1();
 		CollidableObject *bot = collision->getCO2();
 		Bot* colBot = dynamic_cast<Bot*>(bot);
-		if (sprite->getCollisionEdge() == BOTTOM_EDGE)
-		{
-			if (sprite->getPhysicalProperties()->getVelocityY() > 0) {
-				gsm->getSpriteManager()->removeBotFromList(colBot);
-			}
+		if (colBot->getSpriteType()->getSpriteTypeID() == 0) {
+			Player* player = dynamic_cast<Player*>(sprite);
+			player->incrementHealth(1);
+		}
+		else if(colBot->getSpriteType()->getSpriteTypeID() == 3){
+			
+		}
+		else {
+			if (sprite->getCollisionEdge() == BOTTOM_EDGE)
+			{
+				if (sprite->getPhysicalProperties()->getVelocityY() > 0) {
+					gsm->getSpriteManager()->removeBotFromList(colBot);
+				}
 
-			// ENEMY IS DEAD - WE SHOULD PLAY A DEATH ANIMATION
-			// AND MARK IT FOR REMOVAL
-		}
-		else if (bot->getCollisionEdge() == BOTTOM_EDGE){
-			if (colBot->getPhysicalProperties()->getVelocityY() > 0) {
-				RandomJumpingBot* rjb = dynamic_cast<RandomJumpingBot*>(bot);
-				Player* player = dynamic_cast<Player*>(sprite);
-				player->incrementHealth(-1);
-				rjb->pickRandomJump(gsm->getPhysics());
+				// ENEMY IS DEAD - WE SHOULD PLAY A DEATH ANIMATION
+				// AND MARK IT FOR REMOVAL
 			}
-		}
-		
-		else
-		{
-			// PLAYER IS DEAD - WE SHOULD PLAY A DEATH ANIMATION
-			// AND MARK IT FOR REMOVAL/RESPAWN/RESTART GAME, WHATEVER
-			// THE DEMANDS OF THE GAME ARE
+			else if (bot->getCollisionEdge() == BOTTOM_EDGE){
+				if (colBot->getPhysicalProperties()->getVelocityY() > 0) {
+					RandomJumpingBot* rjb = dynamic_cast<RandomJumpingBot*>(bot);
+					Player* player = dynamic_cast<Player*>(sprite);
+					player->incrementHealth(-1);
+					rjb->pickRandomJump(gsm->getPhysics());
+				}
+			}
 		}
 	}
 }

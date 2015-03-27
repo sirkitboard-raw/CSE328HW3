@@ -23,7 +23,7 @@ public:
 	void				resetJumped()			{ jumped = 0; }
 	void				incrementJumped()		{ jumped++; }
 	int					getHealth()				{ return health; }
-	void				incrementHealth(int incr) { health += incr; }
+	void				incrementHealth(int incr);
 	int					getFrameCount()			{ return frameCount;  }
 	void				setFrameCount(int st)	{ frameCount = st; }
 	bool				isVisible()				{ return visible; }

@@ -40,7 +40,7 @@ int Player::checkWin(World* world) {
 }
 
 void Player::checkVisible() {
-	if (health == 10) {
+	if (health >= 10) {
 		visible = true;
 		frameCount = 0;
 	}
@@ -74,5 +74,15 @@ bool Player::diedLastTurn() {
 	else {
 		diedLast = false;
 		return true;
+	}
+}
+
+
+void Player::incrementHealth(int incr) {
+	if (health + incr > 15) {
+		health = 15;
+	}
+	else {
+		health += incr;
 	}
 }

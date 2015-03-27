@@ -111,7 +111,7 @@ void RandomFloatingBot::think(Game *game)
 {
 	// EACH FRAME WE'LL TEST THIS BOT TO SEE IF WE NEED
 	// TO PICK A DIFFERENT DIRECTION TO FLOAT IN
-
+	getPhysicalProperties()->incVelocity(0.0f, -0.8f);
 	if (cyclesRemainingBeforeThinking == 0)
 	{
 		GameStateManager *gsm = game->getGSM();
@@ -120,4 +120,8 @@ void RandomFloatingBot::think(Game *game)
 	}
 	else
 		cyclesRemainingBeforeThinking--;
+}
+
+RandomFloatingBot::~RandomFloatingBot() {
+	
 }
