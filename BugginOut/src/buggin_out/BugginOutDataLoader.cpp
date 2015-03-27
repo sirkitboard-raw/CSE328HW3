@@ -197,6 +197,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelName, wstring level
 	player->affixTightAABBBoundingVolume();
 
 	AnimatedSpriteType *botSpriteType = spriteManager->getSpriteType(1);
+	AnimatedSpriteType *botHealthSprite = spriteManager->getSpriteType(0);
 	// AND LET'S ADD A BUNCH OF RANDOM JUMPING BOTS, FIRST ALONG
 	// A LINE NEAR THE TOP
 
@@ -224,8 +225,8 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelName, wstring level
 //	makeRandomJumpingBot(game, botSpriteType, 700, 1400);
 
 	// AND THEN A BUNCH LINED UP NEAR THE LEVEL EXIT
-	for (int i = 0; i < 14; i++)
-		makeRandomJumpingBot(game, botSpriteType, 1700.0f + (i*100.0f), 1300.0f);
+	//for (int i = 0; i < 14; i++)
+		//makeRandomJumpingBot(game, botSpriteType, 1700.0f + (i*100.0f), 1300.0f);
 
 }
 

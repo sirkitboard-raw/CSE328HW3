@@ -175,3 +175,10 @@ void SpriteManager::removeBot() {
 void SpriteManager::removeBotFromList(Bot* bot) {
 	bots.remove(bot);
 }
+
+void SpriteManager::checkCollision(Physics* physics, int playerIndex) {
+	std::list<Bot*> botList = botTree.getBotsInNode(playerIndex);
+	for (Bot* bot : botList) {
+		physics->addBotCollision(&player, bot);
+	}
+}

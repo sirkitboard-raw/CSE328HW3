@@ -148,3 +148,7 @@ void RandomJumpingBot::think(Game *game)
 		animationRandomizer = (rand() % 45) + 5;
 	}
 }
+
+RandomJumpingBot::~RandomJumpingBot() {
+	
+}

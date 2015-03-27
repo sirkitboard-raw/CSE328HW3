@@ -56,6 +56,7 @@ public:
 	// PAIR OVER AND OVER AGAIN. THAT SCENARIO IS VERY HARD TO AVOID
 	// IN A CONTINUOUS SYSTEM
 	map<CollidableObject*, set<Tile*>> spriteToTileCollisionsThisFrame;
+	map<CollidableObject*, set<CollidableObject*>> spriteToBotCollisionsThisFrame;
 
 	// USED FOR TESTING PHYSICS BY TURNING IT ON AND OFF IN VARIOUS WAYS
 	bool activated;
@@ -77,6 +78,7 @@ public:
 	// PUBLIC METHODS DEFINED INSIDE Physics.cpp - YOU ARE WELCOME TO ADD MORE OR CHANGE WHAT YOU LIKE
 	void addCollidableObject(CollidableObject *collidableObjectToAdd);
 	void addTileCollision(CollidableObject *dynamicObject, Tile *tile, float tileX, float tileY, float tileWidth, float tileHeight);
+	void addBotCollision(CollidableObject *dynamicObject1, CollidableObject *dynamicObject2);
 	void removeCollidableObject(CollidableObject *collidableObjectToRemove);
 	void togglePhysics() { activated = !activated; }
 	void update(Game *game);

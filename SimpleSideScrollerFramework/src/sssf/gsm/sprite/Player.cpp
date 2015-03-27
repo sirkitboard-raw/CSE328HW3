@@ -4,6 +4,7 @@
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include <sssf/gsm/world/World.h>
 #include "Player.h"
+#include "sssf/gsm/ai/Bot.h"
 
 Player::Player() {
 	jumped = 0;
@@ -11,6 +12,7 @@ Player::Player() {
 	frameCount = 0;
 	visible = true;
 	lives = 3;
+	dead = false;
 }
 
 
@@ -54,6 +56,23 @@ void Player::checkVisible() {
 	}
 }
 
-void Player::checkCollision(int playerIndex) {
-	
+void Player::checkDead() {
+	if (health == 0) {
+		health = 10;
+		lives--;
+		diedLast = true;
+	}
+	if (lives<0) {
+		dead = true;
+	}
+}
+
+bool Player::diedLastTurn() {
+	if (diedLast == false) {
+		return false;
+	}
+	else {
+		diedLast = false;
+		return true;
+	}
 }

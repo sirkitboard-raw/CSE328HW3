@@ -49,9 +49,24 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		// SO WE'LL UPDATE THE PLAYER VELOCITY WHEN THESE KEYS ARE
 		// PRESSED, THAT WAY PHYSICS CAN CORRECT AS NEEDED
 		
+		player->checkDead();
+		if (player->diedLastTurn()) {
+			PhysicalProperties *playerProps = player->getPhysicalProperties();
+			playerProps->setX(PLAYER_INIT_X);
+			playerProps->setY(PLAYER_INIT_Y);
+			playerProps->setVelocity(0.0f, 0.0f);
+			playerProps->setAccelerationX(0);
+			playerProps->setAccelerationY(0);
+			player->setOnTileThisFrame(false);
+			player->setOnTileLastFrame(false);
+			viewport->setViewportX(0);
+			viewport->setViewportY(0);
+			player->affixTightAABBBoundingVolume();
+		}
 		gsm->getSpriteManager()->fillBotTree();
 		int playerNode = gsm->getSpriteManager()->getBotsTree()->indexOf(player);
-		player->checkCollision(playerNode);
+		gsm->getSpriteManager()->checkCollision(gsm->getPhysics(), playerNode);
+		
 		float vX = pp->getVelocityX();
 		float vY = pp->getVelocityY();
 		if (player->wasOnTileLastFrame()) {

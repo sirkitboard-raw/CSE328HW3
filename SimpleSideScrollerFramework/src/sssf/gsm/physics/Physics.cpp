@@ -160,6 +160,26 @@ void Physics::addTileCollision(CollidableObject *dynamicObject, Tile *tile, floa
 	activeCollisions.push_back(collisionToAdd);
 }
 
+void Physics::addBotCollision(CollidableObject *dynamicObject1, CollidableObject *dynamicObject2) {
+	set<CollidableObject*> doTiles = spriteToBotCollisionsThisFrame[dynamicObject1];
+	if (doTiles.find(dynamicObject2) != doTiles.end())
+		return;
+
+	unsigned int co1Edge, co2Edge;
+	float timeUntilCollision = calculateTimeUntilCollision(dynamicObject1, dynamicObject2, co1Edge, co2Edge, 0.0f);
+	if (timeUntilCollision > 1.0f)
+		return;
+
+	Collision *collisionToAdd = recycledCollisions.back();
+	collisionToAdd->setCO1(dynamicObject1);
+	collisionToAdd->setCO2(dynamicObject2);
+	collisionToAdd->setCO1Edge(co1Edge);
+	collisionToAdd->setCO2Edge(co2Edge);
+	collisionToAdd->setCollisionWithTile(false);
+	collisionToAdd->setTimeOfCollision(timeUntilCollision);
+	recycledCollisions.pop_back();
+	activeCollisions.push_back(collisionToAdd);
+}
 
 /*
 	This is where all game physics starts each frame. It is called each frame 
@@ -343,6 +363,7 @@ void Physics::update(Game *game)
 	// WE'RE NOT GOING TO ALLOW MULTIPLE COLLISIONS TO HAPPEN IN A FRAME
 	// BETWEEN THE SAME TWO OBJECTS
 	spriteToTileCollisionsThisFrame.clear();
+	spriteToBotCollisionsThisFrame.clear();
 }
 
 /*
@@ -709,7 +730,10 @@ void Physics::performCollisionResponse(Collision *collision)
 	}
 
 	// YOU'LL NEED TO HANDLE SPRITE-TO-SPRITE COLLISIONS
-
+	else {
+		
+	}
+		//OutputDebugStringA("Sprite-Sprite happened")
 
 	// MAKE SURE SPRITES ON TILES REMAIN ON TILES
 	if (co1->isOnTileThisFrame())

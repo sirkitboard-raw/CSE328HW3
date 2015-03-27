@@ -38,15 +38,17 @@ void BugginOutTextGenerator::appendMouseCoords(Game *game)
 }
 
 void BugginOutTextGenerator::appendLives(Game* game) {
+	wstringstream wss;
 	int lives = game->getGSM()->getSpriteManager()->getPlayer()->getLives();
-	wstringstream lss;
 	if (lives == 3) { livesText.append(L"LIVES LEFT : 3\n"); }
-	if (lives == 2) { livesText.append(L"LIVES LEFT : 2\n"); }
-	if (lives == 1) { livesText.append(L"LIVES LEFT : 1\n"); }
-	if (lives == 0) { livesText.append(L"LIVES LEFT : 0\n"); }
-//	lss << "0";
-//	lss << L"\n";
-	textToGenerate.append(lss.str());
+	else if (lives == 2) { livesText.append(L"LIVES LEFT : 2\n"); }
+	else if (lives == 1) { livesText.append(L"LIVES LEFT : 1\n"); }
+	else if (lives == 0) { livesText.append(L"LIVES LEFT : 0\n"); }
+	int health = game->getGSM()->getSpriteManager()->getPlayer()->getHealth();
+	wss << L"\n";
+	wss << L"Health ";
+	wss << health;
+	livesText.append(wss.str());
 }
 
 

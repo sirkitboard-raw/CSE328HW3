@@ -65,4 +65,5 @@ public:
 	void				update(Game *game);
 	void				removeBot();
 	void				removeBotFromList(Bot* bot);
+	void				checkCollision(Physics* physics, int playerIndex);
 };

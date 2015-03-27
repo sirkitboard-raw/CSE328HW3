@@ -113,5 +113,48 @@ int QuadTree::indexOfBot(AnimatedSprite* animated, int index) {
 	}
 }
 
-
-
+std::list<Bot*> QuadTree::getBotsInNode(int index) {
+	std::list<Bot*> bots;
+	if (index == 0) {
+		for (int i = 0; i < 21; i++) {
+			for (Bot* bot : botHeap[i]->getBotlist()) {
+				bots.push_back(bot);
+			}
+		}
+	}
+	else if (index > 0 && index < 5) {
+		for (Bot* bot : botHeap[0]->getBotlist()) {
+			bots.push_back(bot);
+		}
+		for (Bot* bot : botHeap[index]->getBotlist()) {
+			bots.push_back(bot);
+		}
+		for (Bot* bot : botHeap[4*index+1]->getBotlist()) {
+			bots.push_back(bot);
+		}
+		for (Bot* bot : botHeap[4 * index + 1]->getBotlist()) {
+			bots.push_back(bot);
+		}
+		for (Bot* bot : botHeap[4 * index + 2]->getBotlist()) {
+			bots.push_back(bot);
+		}
+		for (Bot* bot : botHeap[4 * index + 3]->getBotlist()) {
+			bots.push_back(bot);
+		}
+		for (Bot* bot : botHeap[4 * index + 4]->getBotlist()) {
+			bots.push_back(bot);
+		}	
+	}
+	else {
+		for(Bot* bot : botHeap[0]->getBotlist()) {
+			bots.push_back(bot);
+		}
+		for (Bot* bot : botHeap[index]->getBotlist()) {
+			bots.push_back(bot);
+		}
+		for (Bot* bot : botHeap[(index-1)/4]->getBotlist()) {
+			bots.push_back(bot);
+		}
+	}
+	return bots;
+}

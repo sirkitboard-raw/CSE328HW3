@@ -29,4 +29,5 @@ public:
 	int indexOf(Player* player);
 	int indexOfBot(AnimatedSprite* animated, int index);
 	std::list<Bot*> getBotsInViewport(Viewport* viewport);
+	std::list<Bot*> getBotsInNode(int index);
 };
