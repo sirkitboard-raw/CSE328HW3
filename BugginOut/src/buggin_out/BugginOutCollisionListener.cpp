@@ -29,7 +29,7 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 			if (sprite->getCollisionEdge() == BOTTOM_EDGE)
 			{
 				if (sprite->getPhysicalProperties()->getVelocityY() > 0) {
-					gsm->getSpriteManager()->removeBotFromList(colBot);
+					gsm->getSpriteManager()->killBot(colBot);
 				}
 
 				// ENEMY IS DEAD - WE SHOULD PLAY A DEATH ANIMATION
@@ -39,7 +39,7 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 				if (colBot->getPhysicalProperties()->getVelocityY() > 0) {
 					RandomJumpingBot* rjb = dynamic_cast<RandomJumpingBot*>(bot);
 					Player* player = dynamic_cast<Player*>(sprite);
-					player->incrementHealth(-1);
+					//player->incrementHealth(-1);
 					rjb->pickRandomJump(gsm->getPhysics());
 				}
 			}

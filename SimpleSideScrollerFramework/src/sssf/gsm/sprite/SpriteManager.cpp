@@ -81,6 +81,15 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			addSpriteToRenderList(bot, renderList, viewport);
 			botIterator++;
 		}
+
+		list<Bot*>::iterator botDeathIterator;
+		botDeathIterator = dyingBots.begin();
+		while (botDeathIterator != dyingBots.end())
+		{
+			Bot *bot = (*botDeathIterator);
+			addSpriteToRenderList(bot, renderList, viewport);
+			botDeathIterator++;
+		}
 	}
 }
 
@@ -154,6 +163,7 @@ Bot* SpriteManager::removeBot(Bot *botToRemove)
 void SpriteManager::update(Game *game)
 {
 	// UPDATE THE PLAYER SPRITE
+	player.checkDead();
 	player.updateSprite();
 
 	// NOW UPDATE THE REST OF THE SPRITES
@@ -165,6 +175,24 @@ void SpriteManager::update(Game *game)
 		bot->think(game);
 		bot->updateSprite();
 		botIterator++;
+	}
+
+	list<Bot*>::iterator botDeathIterator;
+	botDeathIterator = dyingBots.begin();
+	int deathCount = 0;
+	while (botDeathIterator != dyingBots.end())
+	{
+		Bot *bot = (*botDeathIterator);
+		bot->updateSprite();
+		bot->kill();
+		if (bot->getDying() == 18) {
+			deathCount++;
+		}
+		botDeathIterator++;
+	}
+	while (deathCount>0) {
+		dyingBots.pop_front();
+		deathCount--;
 	}
 }
 
@@ -182,3 +210,10 @@ void SpriteManager::checkCollision(Physics* physics, int playerIndex) {
 		physics->addBotCollision(&player, bot);
 	}
 }
+
+void SpriteManager::killBot(Bot* bot) {
+	removeBotFromList(bot);
+	dyingBots.push_back(bot);
+}
+
+

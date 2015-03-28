@@ -48,9 +48,8 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		// WASD KEY PRESSES WILL CONTROL THE PLAYER
 		// SO WE'LL UPDATE THE PLAYER VELOCITY WHEN THESE KEYS ARE
 		// PRESSED, THAT WAY PHYSICS CAN CORRECT AS NEEDED
-		
-		player->checkDead();
-		if (player->diedLastTurn()) {
+		if (player->getDiedLastTurn()) {
+			player->bringBackToLife();
 			PhysicalProperties *playerProps = player->getPhysicalProperties();
 			playerProps->setX(PLAYER_INIT_X);
 			playerProps->setY(PLAYER_INIT_Y);
@@ -96,7 +95,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			viewport->toggleDebugView();
 			game->getGraphics()->toggleDebugTextShouldBeRendered();
 		}
-		else
+		else if (player->getDying()==0)
 		{
 			vX = 0.0f;
 			player->setCurrentState(IDLE);

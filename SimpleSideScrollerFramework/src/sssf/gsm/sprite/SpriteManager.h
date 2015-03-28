@@ -29,6 +29,7 @@ private:
 	// THESE ARE THE BOTS IN THE GAME, LIKE ENEMIES, ROCKETS, OR ANYTHING
 	// THAT MOVES AROUND AND IS NOT THE PLAYER
 	list<Bot*> bots;
+	list<Bot*> dyingBots;
 	QuadTree botTree;
 
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
@@ -66,4 +67,5 @@ public:
 	void				removeBot();
 	void				removeBotFromList(Bot* bot);
 	void				checkCollision(Physics* physics, int playerIndex);
+	void				killBot(Bot* bot);
 };

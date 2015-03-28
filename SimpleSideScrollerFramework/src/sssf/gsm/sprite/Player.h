@@ -13,8 +13,8 @@ private:
 	int lives=3;
 	int frameCount;
 	bool visible;
+	int dying;
 	bool dead;
-	bool diedLast;
 
 public:
 	Player();
@@ -29,8 +29,10 @@ public:
 	bool				isVisible()				{ return visible; }
 	int					getLives()				{ return lives; }
 	void				setLives(int liv)		{ lives = liv; }
-	bool				isDead()				{ return dead; }
-	bool				diedLastTurn();			
+	int					getDying()				{ return dying; }
+	bool				getDiedLastTurn();
+	void				kill();
+	void				bringBackToLife();
 
 	int checkWin(World* world);
 	void checkVisible();

@@ -12,7 +12,7 @@ Player::Player() {
 	frameCount = 0;
 	visible = true;
 	lives = 3;
-	dead = false;
+	dying = 0;
 }
 
 
@@ -44,7 +44,11 @@ void Player::checkVisible() {
 		visible = true;
 		frameCount = 0;
 	}
-	else {
+	else if (health == 0) {
+		visible = true;
+		frameCount = 0;
+	}
+	else if(dying==0){
 		if (frameCount < 5) {
 			visible = false;
 		}
@@ -57,26 +61,39 @@ void Player::checkVisible() {
 }
 
 void Player::checkDead() {
-	if (health == 0) {
-		health = 10;
+	if (dying != 0) {
+		kill();
+	}
+	else if (health <= 0) {
 		lives--;
-		diedLast = true;
+		this->setCurrentState(L"DEAD");
+		kill();
 	}
 	if (lives<0) {
+		exit(0);
+	}
+}
+
+bool Player::getDiedLastTurn() {
+	return dead;
+}
+
+void Player::kill() {
+	if (dying == 0) {
+		getPhysicalProperties()->setCollidable(false);
+	}
+	if (dying >= 18) {
 		dead = true;
 	}
+	dying++;
 }
 
-bool Player::diedLastTurn() {
-	if (diedLast == false) {
-		return false;
-	}
-	else {
-		diedLast = false;
-		return true;
-	}
+void Player::bringBackToLife() {
+	dying = 0;
+	dead = false;
+	health = 10;
+	getPhysicalProperties()->setCollidable(true);
 }
-
 
 void Player::incrementHealth(int incr) {
 	if (health + incr > 15) {

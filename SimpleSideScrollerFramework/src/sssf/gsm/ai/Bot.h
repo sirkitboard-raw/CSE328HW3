@@ -6,9 +6,25 @@
 
 class Bot : public AnimatedSprite
 {
+	int dying;
 public:
-	Bot()	{}
+	Bot() {
+		dying = 0;
+	}
 	~Bot()	{}
+
+	int getDying() {
+		return dying;
+	}
+
+	int kill() {
+		if (dying == 0) {
+			getPhysicalProperties()->setCollidable(false);
+			setCurrentState(L"DEAD");
+		}
+		dying++;
+		return dying;
+	}
 
 	// TO BE DEFINED BY BOT AI CLASSES
 	virtual void think(Game *game)=0;
