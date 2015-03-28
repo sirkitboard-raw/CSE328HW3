@@ -225,7 +225,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelName, wstring level
 //	makeRandomJumpingBot(game, botSpriteType, 100, 1400);
 //	makeRandomJumpingBot(game, botSpriteType, 400, 1400);	
 //	makeRandomJumpingBot(game, botSpriteType, 700, 1400);
-//	makeRandomFloatingBot(game, botEvilSprite, 1200, 100);
+	makeRandomFloatingBot(game, botEvilSprite, 1280, 1600);
 //	makeRandomFloatingBot(game, botEvilSprite, 1500, 500);
 
 	// AND THEN A BUNCH LINED UP NEAR THE LEVEL EXIT
@@ -235,20 +235,6 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelName, wstring level
 }
 
 
-void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
-{
-	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
-	Physics *physics = game->getGSM()->getPhysics();
-	RandomJumpingBot *bot = new RandomJumpingBot(physics, 30, 120, 40);
-	physics->addCollidableObject(bot);
-	PhysicalProperties *pp = bot->getPhysicalProperties();
-	pp->setPosition(initX, initY);
-	bot->setSpriteType(randomJumpingBotType);
-	bot->setCurrentState(JUMPING);
-	bot->setAlpha(255);
-	spriteManager->addBot(bot);
-	bot->affixTightAABBBoundingVolume();
-}
 
 void BugginOutDataLoader::makeRandomFloatingBot(Game* game, AnimatedSpriteType* randomJumpingBotType, float initX, float initY) {
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();

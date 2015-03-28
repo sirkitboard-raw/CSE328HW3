@@ -17,6 +17,7 @@
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gsm\sprite\SpriteManager.h"
 #include "sssf\gsm\state\GameStateManager.h"
+#include <sssf/gsm/ai/bots/RandomJumpingBot.h>
 
 /*
 	addSpriteToRenderList - This method checks to see if the sprite
@@ -216,4 +217,48 @@ void SpriteManager::killBot(Bot* bot) {
 	dyingBots.push_back(bot);
 }
 
+void SpriteManager::generateBots(Game* game) {
+	if (disf(gen2)<0.02) {
+		if (disf(gen2)<0.2) {
+			AnimatedSpriteType *botHealthSprite = getSpriteType(0);
+			int generatedRandom = dis(gen2);
+			if (generatedRandom == 1) {
+				makeRandomJumpingBot(game, botHealthSprite, 80 , 1350 );
+			}
+			else if (generatedRandom == 2) {
+				makeRandomJumpingBot(game, botHealthSprite, 2800, 100);
+			}
+			else {
+				makeRandomJumpingBot(game, botHealthSprite, 3072 , 1850);
+			}
+		}
+		else {
+			AnimatedSpriteType *botHealthSprite = getSpriteType(1);
+			int generatedRandom = dis(gen2);
+			if (generatedRandom == 1) {
+				makeRandomJumpingBot(game, botHealthSprite, 80, 1350);
+			}
+			else if (generatedRandom == 2) {
+				makeRandomJumpingBot(game, botHealthSprite, 2800, 100);
+			}
+			else {
+				makeRandomJumpingBot(game, botHealthSprite, 3072, 1850);
+			}
+		}
+	}
+}
 
+void SpriteManager::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
+{
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	Physics *physics = game->getGSM()->getPhysics();
+	RandomJumpingBot *bot = new RandomJumpingBot(physics, 30, 120, 40);
+	physics->addCollidableObject(bot);
+	PhysicalProperties *pp = bot->getPhysicalProperties();
+	pp->setPosition(initX, initY);
+	bot->setSpriteType(randomJumpingBotType);
+	bot->setCurrentState(L"JUMPING");
+	bot->setAlpha(255);
+	spriteManager->addBot(bot);
+	bot->affixTightAABBBoundingVolume();
+}

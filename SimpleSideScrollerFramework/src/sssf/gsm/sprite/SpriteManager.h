@@ -18,6 +18,12 @@
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "Player.h"
 #include "QuadTree.h"
+#include <random>
+
+static std::random_device rd2;
+static std::mt19937 gen2(rd2());
+static std::uniform_int_distribution<> dis(1, 3);
+static std::uniform_real_distribution<> disf(0, 1);
 
 class SpriteManager
 {
@@ -25,6 +31,7 @@ private:
 	// NOTE THAT MULTIPLE SPRITES MAY SHARE ARTWORK, SO SPRITE TYPES
 	// SPECIFIES A TYPE OF SPRITE, OF WHICH THERE MAY BE MANY INSTANCES
 	vector<AnimatedSpriteType*> spriteTypes;
+
 
 	// THESE ARE THE BOTS IN THE GAME, LIKE ENEMIES, ROCKETS, OR ANYTHING
 	// THAT MOVES AROUND AND IS NOT THE PLAYER
@@ -68,4 +75,6 @@ public:
 	void				removeBotFromList(Bot* bot);
 	void				checkCollision(Physics* physics, int playerIndex);
 	void				killBot(Bot* bot);
+	void				generateBots(Game* game);
+	void				makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY);
 };

@@ -17,6 +17,9 @@
 #include "sssf\timer\GameTimer.h"
 #include "sssf\platforms\Windows\WindowsInput.h"
 #include "sssf\platforms\Windows\WindowsTimer.h"
+#include "sssf/gui/GameGUI.h"
+#include "sssf/gui/ScreenGUI.h"
+#include "sssf/gui/OverlayImage.h"
 
 static const wstring	W_MOUSE_COORDS_TEXT = L"Mouse: (";
 static const int		W_TEXT_X = 200;
@@ -40,15 +43,31 @@ void BugginOutTextGenerator::appendMouseCoords(Game *game)
 void BugginOutTextGenerator::appendLives(Game* game) {
 	wstringstream wss;
 	int lives = game->getGSM()->getSpriteManager()->getPlayer()->getLives();
-	if (lives == 3) { livesText.append(L"LIVES LEFT : 3\n"); }
-	else if (lives == 2) { livesText.append(L"LIVES LEFT : 2\n"); }
-	else if (lives == 1) { livesText.append(L"LIVES LEFT : 1\n"); }
-	else if (lives == 0) { livesText.append(L"LIVES LEFT : 0\n"); }
-	int health = game->getGSM()->getSpriteManager()->getPlayer()->getHealth();
-	wss << L"\n";
-	wss << L"Health ";
-	wss << health;
+	unsigned int imageID = game->getGraphics()->getGUITextureManager()->loadTexture(W_RDM_PATH);
+	if (game->getGSM()->isGameInProgress()) {
+		ScreenGUI* screen = game->getGUI()->getScreen(GS_GAME_IN_PROGRESS);
+		screen->clearOverlayImages();
+		int x = 300;
+		wss << L"Lives : ";
+		for (int i = 0; i < lives; i++) {
+			OverlayImage *imageToAdd = new OverlayImage();
+			imageToAdd->x = x;
+			imageToAdd->y = 2;
+			imageToAdd->z = 2;
+			imageToAdd->alpha = 200;
+			imageToAdd->width = 30;
+			imageToAdd->height = 30;
+			imageToAdd->imageID = imageID;
+			screen->addOverlayImage(imageToAdd);
+			x += 80;
+		}
+		int health = game->getGSM()->getSpriteManager()->getPlayer()->getHealth();
+		wss << L"\n";
+		wss << L"Health ";
+		wss << health;
+	}
 	livesText.append(wss.str());
+	
 }
 
 

@@ -48,6 +48,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		// WASD KEY PRESSES WILL CONTROL THE PLAYER
 		// SO WE'LL UPDATE THE PLAYER VELOCITY WHEN THESE KEYS ARE
 		// PRESSED, THAT WAY PHYSICS CAN CORRECT AS NEEDED
+		gsm->getSpriteManager()->generateBots(game);
 		if (player->getDiedLastTurn()) {
 			player->bringBackToLife();
 			PhysicalProperties *playerProps = player->getPhysicalProperties();

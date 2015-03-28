@@ -23,7 +23,8 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 			player->incrementHealth(1);
 		}
 		else if(colBot->getSpriteType()->getSpriteTypeID() == 3){
-			
+			Player* player = dynamic_cast<Player*>(sprite);
+			player->incrementHealth(-20);
 		}
 		else {
 			if (sprite->getCollisionEdge() == BOTTOM_EDGE)
@@ -39,7 +40,7 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 				if (colBot->getPhysicalProperties()->getVelocityY() > 0) {
 					RandomJumpingBot* rjb = dynamic_cast<RandomJumpingBot*>(bot);
 					Player* player = dynamic_cast<Player*>(sprite);
-					//player->incrementHealth(-1);
+					player->incrementHealth(-1);
 					rjb->pickRandomJump(gsm->getPhysics());
 				}
 			}

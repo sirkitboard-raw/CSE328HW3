@@ -55,4 +55,5 @@ public:
 	bool fireButtonCommand(Game *game);
 	void registerButtonEventHandler(ButtonEventHandler *eventHandler);
 	void updateAllButtons(long mouseX, long mouseY);
+	void clearOverlayImages();
 };
